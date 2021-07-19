@@ -1,9 +1,11 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import Stats from "three/examples/jsm/libs/stats.module";
+// import Stats from "three/examples/jsm/libs/stats.module";
 
+// scene
 const scene = new THREE.Scene();
 
+// camera
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -12,20 +14,23 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.z = 2;
 
+// render
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+// object
 const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial({
   color: 0x00ff00,
-  wireframe: true,
+  wireframe: true
 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
+// resize window
 window.addEventListener(
   "resize",
   () => {
@@ -37,8 +42,9 @@ window.addEventListener(
   false
 );
 
-const stats = Stats();
-document.body.appendChild(stats.dom);
+// mointor
+// const stats = Stats();
+// document.body.appendChild(stats.dom);
 
 var animate = function () {
   requestAnimationFrame(animate);
@@ -46,7 +52,7 @@ var animate = function () {
   cube.rotation.y += 0.01;
   controls.update();
   render();
-  stats.update();
+  // stats.update();
 };
 
 function render() {
